@@ -257,17 +257,17 @@ ATOM RegisterWindowClass(HINSTANCE instanceHandle)
 
 	wcex.cbSize = sizeof(WNDCLASSEX);
 
-	wcex.style		  = (CS_HREDRAW | CS_VREDRAW);
-	wcex.lpfnWndProc	= WndProc;
-	wcex.cbClsExtra	 = 0;
-	wcex.cbWndExtra	 = 0;
-	wcex.hInstance	  = instanceHandle;
-	wcex.hIcon		  = LoadIcon(instanceHandle, MAKEINTRESOURCE(IDI_EGEP));
-	wcex.hCursor		= LoadCursor(nullptr, IDC_ARROW);
-	wcex.hbrBackground  = reinterpret_cast<HBRUSH>(COLOR_WINDOW+1);
-	wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_EGEP);
-	wcex.lpszClassName  = windowClassName;
-	wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+	wcex.style = (CS_HREDRAW | CS_VREDRAW);
+	wcex.lpfnWndProc = WndProc;
+	wcex.cbClsExtra = 0;
+	wcex.cbWndExtra = 0;
+	wcex.hInstance = instanceHandle;
+	wcex.hIcon = LoadIcon(instanceHandle, MAKEINTRESOURCE(IDI_EGEP));
+	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	wcex.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW+1);
+	wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_EGEP);
+	wcex.lpszClassName = windowClassName;
+	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
 	return RegisterClassExW(&wcex);
 }
