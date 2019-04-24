@@ -201,20 +201,20 @@ LRESULT CALLBACK WndProc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM 
 
 int APIENTRY wWinMain(_In_ HINSTANCE instanceHandle, _In_opt_ HINSTANCE previousInstanceHandle, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
-    UNREFERENCED_PARAMETER(previousInstanceHandle);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+	UNREFERENCED_PARAMETER(previousInstanceHandle);
+	UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // Initialize global strings
-    LoadStringW(instanceHandle, IDS_APP_TITLE, titleString, maxStringLength);
-    LoadStringW(instanceHandle, IDC_EGEP, windowClassName, maxStringLength);
-    RegisterWindowClass(instanceHandle);
+	// Initialize global strings
+	LoadStringW(instanceHandle, IDS_APP_TITLE, titleString, maxStringLength);
+	LoadStringW(instanceHandle, IDC_EGEP, windowClassName, maxStringLength);
+	RegisterWindowClass(instanceHandle);
 
-    // Perform application initialisation:
-    if (!InitInstance (instanceHandle, nCmdShow))
-        return FALSE;
+	// Perform application initialisation:
+	if (!InitInstance (instanceHandle, nCmdShow))
+		return FALSE;
 
 	// Load accelerator table
-    HACCEL acceleratorTableHandle = LoadAccelerators(instanceHandle, MAKEINTRESOURCE(IDC_EGEP));
+	HACCEL acceleratorTableHandle = LoadAccelerators(instanceHandle, MAKEINTRESOURCE(IDC_EGEP));
 
 	running = true;
 
@@ -247,29 +247,29 @@ int APIENTRY wWinMain(_In_ HINSTANCE instanceHandle, _In_opt_ HINSTANCE previous
 		update(deltaTime);
 	}
 
-    return static_cast<int>(message.wParam);
+	return static_cast<int>(message.wParam);
 }
 
 // Registers the window class
 ATOM RegisterWindowClass(HINSTANCE instanceHandle)
 {
-    WNDCLASSEXW wcex;
+	WNDCLASSEXW wcex;
 
-    wcex.cbSize = sizeof(WNDCLASSEX);
+	wcex.cbSize = sizeof(WNDCLASSEX);
 
-    wcex.style          = (CS_HREDRAW | CS_VREDRAW);
-    wcex.lpfnWndProc    = WndProc;
-    wcex.cbClsExtra     = 0;
-    wcex.cbWndExtra     = 0;
-    wcex.hInstance      = instanceHandle;
-    wcex.hIcon          = LoadIcon(instanceHandle, MAKEINTRESOURCE(IDI_EGEP));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
-    wcex.hbrBackground  = reinterpret_cast<HBRUSH>(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_EGEP);
-    wcex.lpszClassName  = windowClassName;
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
+	wcex.style		  = (CS_HREDRAW | CS_VREDRAW);
+	wcex.lpfnWndProc	= WndProc;
+	wcex.cbClsExtra	 = 0;
+	wcex.cbWndExtra	 = 0;
+	wcex.hInstance	  = instanceHandle;
+	wcex.hIcon		  = LoadIcon(instanceHandle, MAKEINTRESOURCE(IDI_EGEP));
+	wcex.hCursor		= LoadCursor(nullptr, IDC_ARROW);
+	wcex.hbrBackground  = reinterpret_cast<HBRUSH>(COLOR_WINDOW+1);
+	wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_EGEP);
+	wcex.lpszClassName  = windowClassName;
+	wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
-    return RegisterClassExW(&wcex);
+	return RegisterClassExW(&wcex);
 }
 
 // Saves instance handle and creates main window
