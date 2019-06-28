@@ -112,9 +112,14 @@ void update(float deltaTime)
 
 int mainLoop(HACCEL acceleratorTableHandle)
 {
+	constexpr float targetFrameTime = (1.0f / 60.0f);
+
 	DWORD previousTicks = GetTickCount();
 
+	float accumulatedFrameTime = 0;
+
 	MSG message;
+
 	while(running)
 	{
 		// Calculate delta time
@@ -136,7 +141,23 @@ int mainLoop(HACCEL acceleratorTableHandle)
 				running = false;
 		}
 
-		update(deltaTime);
+		accumulatedFrameTime += deltaTime;
+
+		if(accumulatedFrameTime > targetFrameTime)
+		{
+			// It's unlikely that this loop will occur more than once
+			// but the loop is here just in case there's a big delay for some reason.
+			while(accumulatedFrameTime > targetFrameTime)
+			{
+				update(targetFrameTime);
+				accumulatedFrameTime -= targetFrameTime;
+			}
+		}
+		else
+		{
+			const DWORD sleepTime = static_cast<DWORD>((targetFrameTime - deltaTime) * 1000.0f);
+			Sleep(sleepTime);
+		}
 	}
 
 	return static_cast<int>(message.wParam);
