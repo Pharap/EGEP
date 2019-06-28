@@ -110,6 +110,38 @@ void update(float deltaTime)
 	}
 }
 
+int mainLoop(HACCEL acceleratorTableHandle)
+{
+	DWORD previousTicks = GetTickCount();
+
+	MSG message;
+	while(running)
+	{
+		// Calculate delta time
+		DWORD currentTicks = GetTickCount();
+		DWORD deltaTicks = (currentTicks - previousTicks);
+		float deltaTime = (static_cast<float>(deltaTicks) / 1000.0f);
+		previousTicks = currentTicks;
+
+		// Main message loop:
+		while(PeekMessage(&message, nullptr, 0, 0, PM_REMOVE) != 0)
+		{
+			if(!TranslateAccelerator(message.hwnd, acceleratorTableHandle, &message))
+			{
+				TranslateMessage(&message);
+				DispatchMessage(&message);
+			}
+
+			if(message.message == WM_QUIT)
+				running = false;
+		}
+
+		update(deltaTime);
+	}
+
+	return static_cast<int>(message.wParam);
+}
+
 LRESULT paint(HWND windowHandle, WPARAM wParam, LPARAM lParam)
 {
 	UNREFERENCED_PARAMETER(wParam);
@@ -223,34 +255,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instanceHandle, _In_opt_ HINSTANCE previous
 
 	setup();
 
-	DWORD previousTicks = GetTickCount();
-
-	MSG message;
-	while(running)
-	{
-		// Calculate delta time
-		DWORD currentTicks = GetTickCount();
-		DWORD deltaTicks = (currentTicks - previousTicks);
-		float deltaTime = (static_cast<float>(deltaTicks) / 1000.0f);
-		previousTicks = currentTicks;
-		
-		// Main message loop:
-		while(PeekMessage(&message, nullptr, 0, 0, PM_REMOVE) != 0)
-		{
-			if(!TranslateAccelerator(message.hwnd, acceleratorTableHandle, &message))
-			{
-				TranslateMessage(&message);
-				DispatchMessage(&message);
-			}
-
-			if(message.message == WM_QUIT)
-				running = false;
-		}
-
-		update(deltaTime);
-	}
-
-	return static_cast<int>(message.wParam);
+	return mainLoop(acceleratorTableHandle);
 }
 
 // Registers the window class
