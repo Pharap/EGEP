@@ -165,7 +165,6 @@ LRESULT CALLBACK WndProc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM 
 
 			const RECT buttonBounds { left, top, right, bottom };
 			InvalidateRect(windowHandle, &buttonBounds, FALSE);
-
 		}
 		break;
 
@@ -186,7 +185,6 @@ LRESULT CALLBACK WndProc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM 
 				const RECT buttonBounds { left, top, right, bottom };
 				InvalidateRect(windowHandle, &buttonBounds, FALSE);
 			}
-
 		}
 		break;
 
