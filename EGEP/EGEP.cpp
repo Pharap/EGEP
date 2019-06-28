@@ -102,10 +102,10 @@ void update(float deltaTime)
 	{
 		HWND windowHandle = GetActiveWindow();
 
-		RECT oldButtonBounds { previousX, previousY, positionX + 100, positionY + 80 };
+		RECT oldButtonBounds { previousX, previousY, previousX + 100, previousY + 80 };
 		InvalidateRect(windowHandle, &oldButtonBounds, FALSE);
 
-		RECT newButtonBounds { positionX, positionY, positionX + 100, positionY + 80 };
+		RECT newButtonBounds { currentX, currentY, currentX + 100, currentY + 80 };
 		InvalidateRect(windowHandle, &newButtonBounds, FALSE);
 	}
 }
