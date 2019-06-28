@@ -243,6 +243,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE instanceHandle, _In_opt_ HINSTANCE previous
 		}
 
 		update(deltaTime);
+		BOOL switched = SwitchToThread();
+		UNREFERENCED_PARAMETER(switched);
 	}
 
 	return static_cast<int>(message.wParam);
