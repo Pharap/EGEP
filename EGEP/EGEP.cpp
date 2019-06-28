@@ -124,7 +124,12 @@ LRESULT paint(HWND windowHandle, WPARAM wParam, LPARAM lParam)
 
 	SelectObject(deviceContextHandle, buttonBrush);
 
-	Rectangle(deviceContextHandle, positionX, positionY, positionX + 100, positionY + 80);
+	const WORD left = static_cast<WORD>(positionX);
+	const WORD right = static_cast<WORD>(positionX + 100);
+	const WORD top = static_cast<WORD>(positionY);
+	const WORD bottom = static_cast<WORD>(positionY + 80);
+
+	Rectangle(deviceContextHandle, left, top, right, bottom);
 
 	DeleteObject(buttonBrush);
 
@@ -149,10 +154,10 @@ LRESULT CALLBACK WndProc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM 
 			const WORD mouseX = LOWORD(lParam);
 			const WORD mouseY = HIWORD(lParam);
 
-			const WORD left = positionX;
-			const WORD right = positionX + 100;
-			const WORD top = positionY;
-			const WORD bottom = positionY + 80;
+			const WORD left = static_cast<WORD>(positionX);
+			const WORD right = static_cast<WORD>(positionX + 100);
+			const WORD top = static_cast<WORD>(positionY);
+			const WORD bottom = static_cast<WORD>(positionY + 80);
 
 			if((mouseX >= left) && (mouseX <= right) && (mouseY >= top) && (mouseY <= bottom))
 			{
@@ -173,10 +178,10 @@ LRESULT CALLBACK WndProc(HWND windowHandle, UINT message, WPARAM wParam, LPARAM 
 			const WORD mouseX = LOWORD(lParam);
 			const WORD mouseY = HIWORD(lParam);
 
-			const WORD left = positionX;
-			const WORD right = positionX + 100;
-			const WORD top = positionY;
-			const WORD bottom = positionY + 80;
+			const WORD left = static_cast<WORD>(positionX);
+			const WORD right = static_cast<WORD>(positionX + 100);
+			const WORD top = static_cast<WORD>(positionY);
+			const WORD bottom = static_cast<WORD>(positionY + 80);
 
 			if((mouseX >= left) && (mouseX <= right) && (mouseY >= top) && (mouseY <= bottom))
 			{
